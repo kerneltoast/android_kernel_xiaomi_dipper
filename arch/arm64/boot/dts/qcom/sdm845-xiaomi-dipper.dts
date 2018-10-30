@@ -13,6 +13,18 @@
 	model = "Xiaomi Technologies, Inc. Dipper new MP v2.1";
 	compatible = "qcom,sdm845-mtp", "qcom,sdm845", "qcom,mtp";
 	qcom,board-id = <55 0>;
+
+	reserved-memory {
+		ramoops@b0000000 {
+			compatible = "ramoops";
+			reg = <0 0xb0000000 0 0x400000>;
+			record-size = <0x40000>;
+			console-size = <0x40000>;
+			ftrace-size = <0x40000>;
+			pmsg-size = <0x200000>;
+			ecc-size = <0>;
+		};
+	};
 };
 
 &removed_region {
