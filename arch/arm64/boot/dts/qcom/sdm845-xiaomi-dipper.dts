@@ -1,0 +1,48 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Copyright (C) 2019 Sultan Alsawaf <sultan@kerneltoast.com>.
+ */
+
+/dts-v1/;
+
+#include "sdm845-v2.1.dtsi"
+#include "sdm845-sde-display.dtsi"
+#include "sdm845-mtp.dtsi"
+
+/ {
+	model = "Xiaomi Technologies, Inc. Dipper new MP v2.1";
+	compatible = "qcom,sdm845-mtp", "qcom,sdm845", "qcom,mtp";
+	qcom,board-id = <55 0>;
+};
+
+&removed_region {
+	reg = <0 0x85fc0000 0 0x4940000>;
+};
+
+&pcie0 {
+	status = "disabled";
+};
+
+&pcie1 {
+	status = "disabled";
+};
+
+&firmware {
+	android {
+		fstab {
+			system {
+				compatible = "android,system";
+				dev = "/dev/block/platform/soc/1d84000.ufshc/by-name/system";
+				fsmgr_flags = "wait";
+				mnt_flags = "ro,barrier=1,discard";
+				type = "ext4";
+			};
+
+			vendor {
+				fsmgr_flags = "wait";
+			};
+		};
+
+		/delete-node/ vbmeta;
+	};
+};

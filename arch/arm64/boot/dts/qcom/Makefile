@@ -630,6 +630,10 @@ dtb-$(CONFIG_ARCH_SDM429) += sdm429-mtp.dtb \
 
 endif
 
+ifeq ($(CONFIG_BOARD_DIPPER),y)
+dtb-y := sdm845-xiaomi-dipper.dtb
+endif
+
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)
 clean-files	:= *.dtb

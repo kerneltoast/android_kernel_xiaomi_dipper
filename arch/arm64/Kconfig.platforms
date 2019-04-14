@@ -342,4 +342,9 @@ config ARCH_ZYNQMP
 	help
 	  This enables support for Xilinx ZynqMP Family
 
+config BOARD_DIPPER
+	bool "Xiaomi Mi 8 (Dipper)"
+	depends on ARCH_QCOM
+	select ARCH_SDM845
+
 endmenu
