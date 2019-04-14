@@ -8,6 +8,7 @@
 #include "sdm845-v2.1.dtsi"
 #include "sdm845-sde-display.dtsi"
 #include "sdm845-mtp.dtsi"
+#include "dsi-panel-ss-notch-fhd-ea8074-cmd.dtsi"
 
 / {
 	model = "Xiaomi Technologies, Inc. Dipper new MP v2.1";
@@ -56,5 +57,32 @@
 		};
 
 		/delete-node/ vbmeta;
+	};
+};
+
+&mdss_dsi_phy0 {
+	qcom,panel-allow-phy-poweroff;
+};
+
+&soc {
+	/delete-node/ qcom,dsi-display@0;
+
+	qcom,dsi-display@0 {
+		compatible = "qcom,dsi-display";
+		label = "dsi_ss_ea8074_notch_fhd_cmd_display";
+		qcom,display-type = "primary";
+
+		qcom,dsi-ctrl = <&mdss_dsi0>;
+		qcom,dsi-phy = <&mdss_dsi_phy0>;
+		clocks = <&mdss_dsi0_pll BYTECLK_MUX_0_CLK>,
+			<&mdss_dsi0_pll PCLK_MUX_0_CLK>;
+		clock-names = "mux_byte_clk", "mux_pixel_clk";
+
+		pinctrl-names = "panel_active", "panel_suspend";
+		pinctrl-0 = <&sde_dsi_active &sde_te_active>;
+		pinctrl-1 = <&sde_dsi_suspend &sde_te_suspend>;
+
+		qcom,dsi-panel = <&dsi_ss_notch_fhd_ea8074_cmd>;
+		vddio-supply = <&pm8998_l14>;
 	};
 };
