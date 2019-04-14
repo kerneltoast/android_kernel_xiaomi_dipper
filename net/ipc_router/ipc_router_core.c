@@ -3973,12 +3973,9 @@ static void *ipc_router_create_log_ctx(char *name)
 		return NULL;
 	sub_log_ctx->log_ctx = ipc_log_context_create(
 				IPC_RTR_INFO_PAGES, name, 0);
-	if (!sub_log_ctx->log_ctx) {
+	if (!sub_log_ctx->log_ctx)
 		IPC_RTR_ERR("%s: Unable to create IPC logging for [%s]",
 			    __func__, name);
-		kfree(sub_log_ctx);
-		return NULL;
-	}
 	strlcpy(sub_log_ctx->log_ctx_name, name, LOG_CTX_NAME_LEN);
 	INIT_LIST_HEAD(&sub_log_ctx->list);
 	list_add_tail(&sub_log_ctx->list, &log_ctx_list);
